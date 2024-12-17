@@ -8,7 +8,7 @@ function startTrainer() {
 
   let output = `Original String: ${inputString}\n\n`;
 
-  // Demonstrating String Methods
+  // Demonstrating String Methods - String usullarini ko'rsatish
   output += `//string.length 
   \n`;
   output += `//  o'qilishi: string o'zgaruvchisining qiymatiga kirib, uning uzunligini qaytar 

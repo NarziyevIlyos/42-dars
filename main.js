@@ -9,9 +9,10 @@ let res = arrNumbers.slice(2,4);
 console.log(res);
 
 // arr6
-let fruits = ["apple", "banana", "cherry"];
+let fruits = ["cherry", "apple", "banana"];
 res =  fruits.splice(1,1);
+let res2 = fruits.sort();
 console.log(res);
 
 //arr7
-let numbers = [1,2,3,4,5];
+let numbers = [1,2,3,4,];
