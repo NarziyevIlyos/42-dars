@@ -210,7 +210,9 @@ function startArrayTrainer() {
   delete allStudents[3];
   output += `Array after delete: ${JSON.stringify(allStudents)}\n\n`;
 
-  // Massivdan elementni TOPISH va QIDIRISH usullari
+  output += `====================================================\n`;
+  output += `====================================================\n\n`;
+   // Massivdan elementni TOPISH va QIDIRISH usullari
   output += `Massivdan elementni TOPISH va QIDIRISH usullari \n\n`;
 
   output += `Eslatma!!!
