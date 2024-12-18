@@ -16,3 +16,10 @@ console.log(res);
 
 //arr7
 let numbers = [1,2,3,4,];
+
+//
+const fruits1 = ["Banana", "Orange", "Apple", "Mango"];
+let stringedArray =fruits1.toString();
+console.log(stringedArray);
+console.log(fruits1);
+console.log(typeof fruits1);
