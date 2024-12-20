@@ -212,7 +212,7 @@ function startArrayTrainer() {
 
   output += `====================================================\n`;
   output += `====================================================\n\n`;
-   // Massivdan elementni TOPISH va QIDIRISH usullari
+  // Massivdan elementni TOPISH va QIDIRISH usullari
   output += `Massivdan elementni TOPISH va QIDIRISH usullari \n\n`;
 
   output += `Eslatma!!!
@@ -474,17 +474,153 @@ function startArrayTrainer() {
     return value > 18;
   });
 
-  let indexOfSearchingLastElement = numbers.findLastIndex((value, index, array) => {
-    output += `Value: ${JSON.stringify(value)}, Index: ${JSON.stringify(
-      index
-    )}, Array: ${JSON.stringify(array)} \n`;
-    return value > 18;
-  });
+  let indexOfSearchingLastElement = numbers.findLastIndex(
+    (value, index, array) => {
+      output += `Value: ${JSON.stringify(value)}, Index: ${JSON.stringify(
+        index
+      )}, Array: ${JSON.stringify(array)} \n`;
+      return value > 18;
+    }
+  );
   output += `\n`;
   output += `Qidiruv natijasi: ${JSON.stringify(
     indexOfSearchingLastElement
   )}\n\n`;
 
+  //======================================================================
+  //======================================================================
+  output += `===================================================== \n===================================================== \n\n`;
+  output += `Alfabet bo'yicha SARALASH \n\n`;
+
+  // 27. Sort the array alphabetically
+  output += `27. array.sort() \n Massivning qiymatiga kir, uning qiymatidagi har bir elementni shu joyning o'zida => ALFABET tartibida => SARALA va saralangan ELEMENTLARdan tashkil topgan massivni qaytar. 
+  \n`;
+  output += `// students = ["Alice","BOB","charlie","dave","Eve","Frank","Zara"]\n`;
+  output += `// kodi: students.sort();`;
+  output += "// Sort the array alphabetically\n\n";
+  students.sort();
+  output += `Sorted Array: ${JSON.stringify(students)}\n\n`;
+
+  // 28. Sort the array alphabetically
+  output += `28. array.toSorted() \n Massivning qiymatidan NUSXA ol, olingan NUSXAning elementlarini ALFABET tartibida SARALA, keyin YANGI MASSIV yarat va SARALANGAN ELEMENTLARni shu massivga joyla va shu massivni QAYTAR. 
+  \n`;
+  output += `// students = ["Alice","BOB","charlie","dave","Eve","Frank","Zara"]\n`;
+  output += `// kodi: students.toSorted();`;
+  output += `// Sort the array alphabetically\n\n`;
+  let newSortedArray = students.toSorted();
+  output += `Sorted Array: ${JSON.stringify(newSortedArray)}\n\n`;
+  output += `Original Array: ${JSON.stringify(students)}\n\n`;
+
+  output += `toSorted() usuli => asl massivni o'zgartirmasdan, undan NUSXA olib, shu NUSXAni => ALFABET tartibida SARALASHdan hosil bo'lgan massivni qaytaradi .
+
+Farqi shundaki, toSorted() usuli => asl massivni o'zgartirmasdan => yangi massiv yaratadi, sort() usuli esa => asl massivni o'zgartirib, natija sifatida qaytaradi. \n\n`;
+
+  // 29. Reverse the array
+  output += `29. array.reverse() \n Massivning qiymatiga kir, uning qiymatidagi elementlar joylashuvini TESKARI tartibda joylashtir, TESKARI TARTIBda joylashgan elementlardan tashkil topgan massivni qaytar. 
+  \n`;
+  output += `// students = ["Alice","BOB","Eve","Frank","Zara","charlie","dave"]\n`;
+  output += `// kodi: students.reverse();`;
+  output += "// Reverse the array\n";
+  students.reverse();
+  output += `Reversed Array: ${JSON.stringify(students)}\n\n`;
+
+  //=================
+  output += `30. array.toReversed() \n Massivning qiymatidan NUSXA ol, olingan NUSXAning elementlarini TESKARI tartibida SARALA, keyin YANGI MASSIV yarat va TESKARI tartibida SARALANGAN ELEMENTLARni shu massivga joyla va shu massivni QAYTAR. 
+  \n`;
+  output += `// students = ["Alice","BOB","charlie","dave","Eve","Frank","Zara"]\n`;
+  output += `// kodi: students.toReversed();`;
+  output += `// Sort the array alphabetically\n\n`;
+  let newReversedArray = students.toReversed();
+  output += `Sorted Array: ${JSON.stringify(newReversedArray)}\n\n`;
+  output += `Original Array: ${JSON.stringify(students)}\n\n`;
+  output += `toReversed() usuli => asl massivni o'zgartirmasdan, undan NUSXA olib, shu NUSXAni teskari o'zgartirishdan hosil bo'lgan massivni qaytaradi .
+
+Farqi shundaki, toReversed() usuli => asl massivni o'zgartirmasdan => yangi massiv yaratadi, reverse() usuli esa => asl massivni o'zgartirib, natija sifatida qaytaradi. \n\n`;
+
+  //======================================================================
+  //======================================================================
+  output += `======================================================== \n======================================================== \n\n`;
+  output += `Son bo'yicha SARALASH \n\n
+  
+  Eslatma!!!
+  
+  STRING turdagi ma'lumotlarni taqqoslashda JavaScript ularning Unicode qiymatlari asosida CHAPdan O'NGga => BELGILAR bo'yicha amalga oshiradi. 
+  * Bunda har ikki STRING turdagi qiymat solishtirganda => qaysi bir qiymatning 1-BELGISI => UNICODE'dagi qiymati katta bo'lsa o'sha qiymatni KATTA deb oladi. 
+    Qolgan belgilar ketma-ketligi e'tiborga olinmaydi.
+  
+  STRING turdagi ma'lumotlarni to'g'ridan-to'ri taqqoslash => TO'G'RI natijani bermaydi.
+  Shuning uchun, STRING turdagi ma'lumotlarni => SON turiga o'tkazish kerak. 
+  \n\n`; 
+
+  output += `Odatda, sort() funktsiyasi => qiymatlarni => STRINGga aylantiradi => STRING (= belgilar ketma-ketligi) sifatida ALFABET ko'rinishida tartiblaydi.
+
+* sort() usuli => STRING uchun yaxshi ishlaydi ("Apple" => "Banana" dan oldin keladi).
+
+Agar sonlar => STRING sifatida tartiblangan bo'lsa, "25" => "100" dan katta bo'ladi, chunki STRING turdagi ikki qiymatni taqqoslaganda, dastur har ikki qiymatning FAQAT 1-BELGIsining UNICODE'dagi qiymatlari bo'yicha taqqoslaydi, UNICODE'da esa "2" => "1" dan katta hisoblanadi. Qolgan belgilar hisobga olinmaydi.
+
+Shu sababli, sort() usuli => raqamlarni tartiblashda => noto'g'ri natija beradi. \n\n`;
+
+output += `const points = [40, 100, 1, 5, 25, 10];
+points.sort(); \n\n`;
+
+const points = ["40", "100", "1", "5", "25", "10"];
+points.sort();
+output += `Natija: ${JSON.stringify(points)} \n\n`;
+
+output += `Buni solishtirish funksiyasiga berish orqali tuzatishingiz mumkin : 
+
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a - b}); 
+\n`;
+
+points.sort(function(a, b){return a - b});
+output += `Natija: ${JSON.stringify(points)} \n\n`;
+
+output += `Massivni KAMAYISH bo'yicha SARALASH uchun xuddi shu usuldan foydalaning: 
+
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b - a}); 
+\n`;
+
+points.sort(function(a, b){return b - a});
+output += `Natija: ${JSON.stringify(points)} \n\n`;
+
+output += `ESLATMA!!!
+
+* SORT() usuli => PARAMETRSIZ => ALFABET bo'yicha TARTIBLAYDI.
+* SORT() usuli => PARAMETRI bo'lsa => SON bo'yicha TARTIBLAYDI.
+* SORT() usuli => 1 ta ixiyoriy parametrga ega, u ham bo'lsa => TAQQOSLASH funksiyasidir. 
+* SORT() usuli => o'zining CALLBACK Funksiyasiga bir vaqtning o'zida 2 ta ARGUMENT uzatishga mo'ljallangan usuldir.
+* TAQQOSLASH funksiyasiga chaqiriqlar soni => ichki ishlatiladigan tartiblash algoritmiga bog'liq.
+\n`;
+
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
+  //=================
   //=================
 
   // Final output
