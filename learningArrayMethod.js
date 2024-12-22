@@ -550,7 +550,7 @@ Farqi shundaki, toReversed() usuli => asl massivni o'zgartirmasdan => yangi mass
   
   STRING turdagi ma'lumotlarni to'g'ridan-to'ri taqqoslash => TO'G'RI natijani bermaydi.
   Shuning uchun, STRING turdagi ma'lumotlarni => SON turiga o'tkazish kerak. 
-  \n\n`; 
+  \n\n`;
 
   output += `Odatda, sort() funktsiyasi => qiymatlarni => STRINGga aylantiradi => STRING (= belgilar ketma-ketligi) sifatida ALFABET ko'rinishida tartiblaydi.
 
@@ -560,32 +560,36 @@ Agar sonlar => STRING sifatida tartiblangan bo'lsa, "25" => "100" dan katta bo'l
 
 Shu sababli, sort() usuli => raqamlarni tartiblashda => noto'g'ri natija beradi. \n\n`;
 
-output += `const points = [40, 100, 1, 5, 25, 10];
+  output += `const points = [40, 100, 1, 5, 25, 10];
 points.sort(); \n\n`;
 
-const points = ["40", "100", "1", "5", "25", "10"];
-points.sort();
-output += `Natija: ${JSON.stringify(points)} \n\n`;
+  const points = ["40", "100", "1", "5", "25", "10"];
+  points.sort();
+  output += `Natija: ${JSON.stringify(points)} \n\n`;
 
-output += `Buni solishtirish funksiyasiga berish orqali tuzatishingiz mumkin : 
+  output += `Buni solishtirish funksiyasiga berish orqali tuzatishingiz mumkin : 
 
 const points = [40, 100, 1, 5, 25, 10];
 points.sort(function(a, b){return a - b}); 
 \n`;
 
-points.sort(function(a, b){return a - b});
-output += `Natija: ${JSON.stringify(points)} \n\n`;
+  points.sort(function (a, b) {
+    return a - b;
+  });
+  output += `Natija: ${JSON.stringify(points)} \n\n`;
 
-output += `Massivni KAMAYISH bo'yicha SARALASH uchun xuddi shu usuldan foydalaning: 
+  output += `Massivni KAMAYISH bo'yicha SARALASH uchun xuddi shu usuldan foydalaning: 
 
 const points = [40, 100, 1, 5, 25, 10];
 points.sort(function(a, b){return b - a}); 
 \n`;
 
-points.sort(function(a, b){return b - a});
-output += `Natija: ${JSON.stringify(points)} \n\n`;
+  points.sort(function (a, b) {
+    return b - a;
+  });
+  output += `Natija: ${JSON.stringify(points)} \n\n`;
 
-output += `ESLATMA!!!
+  output += `ESLATMA!!!
 
 * SORT() usuli => PARAMETRSIZ => ALFABET bo'yicha TARTIBLAYDI.
 * SORT() usuli => PARAMETRI bo'lsa => SON bo'yicha TARTIBLAYDI.
@@ -595,10 +599,145 @@ output += `ESLATMA!!!
 \n`;
 
   //=================
+
+  // fisher-yates-shuffled usuli
+
+  output += `Fisher-Yates Shuffle algoritmi => bu massivni tasodifiylashtirishning => samarali usuli hisoblanadi. 
+  Fisher-Yates Shuffle algoritmi ishlashi:
+
+  1)	Tekshirilayotgan massiv uzunligi noma'lumligi sababli, for loopi kamayish tartibida i - -, i'ning dastlabki qiymati => massivning elementlar sonini aniqlab beruvchi ifodaga (= array.length -1) teng, shart esa i>0 dan katta bo'ladi.
+
+  Qisqa qilib aytganda, for takrorlashidagi i o'zgaruvchisi => massivning oxirgi indeksdan boshlanadi (= array.length - 1 )va orqaga qarab ishlaydi ( i--).
+
+  2)	i o'zgaruvchisi => joriy indeks (= ya'ni ishlov berilayotgan element indeksini) ifodalaydi..
+  3)	J o'zgaruvchisi =>  massivdagi i-indeksda turgan element ( array[i] ) bilan ALAMASHTIRISH uchun TASODIFIY indeksdir.
+  4)	TASODIFIY indekslar ORALIG'I  => [0, i] (shu jumladan 0 va i ham kiradi) bo'lishi kerak.
+  5)	i o'zgaruvchisi => j o'zgaruvchisiga indekslardan foydalanish imkoniyatlar sonini => cheklab beradi.
+  6)	Biroq i bilan random() funksiyasi hosil qilgan o'nli kasr ko'paytmasining Math.floor funksiyasidan chiqqan qiymat nol (0) bilan (i - 1) oralig'ida bo'ladi ya'ni [0, i). Bu esa j o'zgaruvchisining joriy indeksdagi (i) elementini tanlay olmaslikka olib keladi. Sababi, Math.floor() => o'nli kasrning faqat butun qismini oladi. Buni to'g'irlash uchun i'ning qiymatini bittaga oshirib, Math.random'ga ko'paytirish kerak. Ya'ni: Math.floor(random() * ( i + 1 ).
+  7)	i o'zgaruvchisi qiymatining kamayib borishi j o'zgaruvchisining foydalanishi mumkin bo'lgan indekslari oralig'ini ham kamaytirib boradi.
+  Siz shu massivning => qolgan aralashtirilmagan qismidan  ( i-indeksdagi joriy element ham kiradi) tasodifiy birorta elementini tanlamoqchisiz .
+  Masalan: [1,2,3,4,5]
+  Masalan: 
+  •	Random() = 0.2340012;
+  •	i = 5;
+  •	j ning tasodifiy tanlash indeksi => [0,5] gacha bo'lishi kerak.
+  •	// randomning eng katta qiymati => 0.999.. bo'lgan taqdirda ham
+  •	Math.floor(random() * i = 0.9990012 * 5 = 4.9…) = 4 chiqadi.
+  •	// Buni to'g'irlash uchun i'ning qiymatini bittaga oshirib, Math.random'ga ko'paytirish kerak 
+  •	Math.floor(random() * ( i + 1 ) = 0.9990012 * ( 5 + 1 ) = 5.9…) = 5
+  Nima uchun tasodifiy indeksni hisoblashda (i + 1) ifodasidan foydalanish kerak ?
+  javascriptda:
+
+  let j = Math.floor(Math.random() * (i + 1));
+  1.	 (i + 1) ning vazifasi :
+  o	Math.random() => [0, 1) oralig'idagi o'nli kasr sonni hosil qiladi.
+  o	Ushbu o'nli kasr sonni (i + 1) ga ko'paytirish => [0, i + 1) oraliqdagi sonlarni beradi - ya'ni tasodifiy indeks => 0 dan (shu jumladan) i gacha bo'lgan barcha butun sonlarni [0, i ] o'z ichiga oladi.
+  2.	Nima uchun 1 qo'shiladi? :
+  o	Agar 1 qo'shilmasa, tasodifiy indeks => faqat 0 dan ( i - 1 )gacha bo'ladi.
+  U holda j o'zgaruvchisi => joriy i-indeksdan => foydalana olmaydo, bu ushbu algoritm uchun to'g'ri emas;
+
+  algoritm sintaksisi: 
+
+  const points = [40, 100, 1, 5, 25, 10];
+
+  for (let i = points.length -1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i+1));
+    let k = points[i];
+    points[i] = points[j];
+    points[j] = k; 
+  }
+
+    console.log(points);
+
+    ushbu tugmani qayta-qayta bosish orqali massivdagi elementlar FISHER-YATES-SHUFFLED usulida almashayotganini ko'rish mumkin.
+ \n\n`;
+
+  // Ensure the DOM is fully loaded before accessing elements
+  //  document.addEventListener("DOMContentLoaded", () => {
+  //    document.getElementById("demo").innerHTML = array;
+  //  });
+
   //=================
+
+  // massivni eng katta va eng kichik qiymatlarini topish
+
+  output += `===========================================\n=========================================== \n\n`;
+  output += `Massivning eng past (yoki eng yuqori) qiymatini topish
+
+* Massivda maksimal yoki min qiymatni topish uchun o‘rnatilgan funksiyalar mavjud emas.
+
+* Eng past yoki eng yuqori qiymatni topish uchun sizda 3 ta variant mavjud:
+
+    1) Massivni tartiblang va birinchi yoki oxirgi elementni o'qish
+    2) Math.min() yoki Math.max() dan foydalanish
+    3) Uyda ishlab chiqarilgan funktsiyani yozish
+
+Sort() yordamida Minimal qiymatni yoki Maksimal qiymatni topish
+
+* Massivni Sort() usuli yordamida tartiblaganingizdan so'ng, siz eng katta va eng kichik qiymatlarni olish uchun indeksdan foydalanishingiz mumkin.
+
+==========================================
+
+* Massivni O'sish bo'yicha tartiblash: 
+
+const arr1 = [40, 100, 1, 5, 25, 10];
+
+points.sort(function(a, b){return a - b});
+// hozir massivning 1-elementi bo'lgan arr1[0] => eng kichik qiymatga ega
+// massivning oxirgi elementi bo'lgan arr1[arr1.length-1] => eng katta qiymatga ega
+\n\n`;
+
+  const arr1 = [40, 100, 1, 5, 25, 10];
+  output += `Hozirgi massiv: ${JSON.stringify(arr1)} \n\n`;
+  arr1.sort(function (a, b) {
+    return a - b;
+  });
+
+  output += `O'sish tartibida Saralangan massiv: 
+${JSON.stringify(arr1)} \n\n`;
+  output += `Eng kichik qiymat: ${JSON.stringify(arr1[0])} \n\n`;
+  output += `Eng katta qiymat: ${JSON.stringify(arr1[arr1.length - 1])} \n\n`;
+
   //=================
+
+  output += ` ==========================================
+
+Massivni => Kamayish bo'yicha tartiblash: 
+
+const arr1 = [40, 100, 1, 5, 25, 10];
+
+points.sort(function(a, b){return b - a});
+// hozir massivning 1-elementi bo'lgan arr1[0] => eng katta qiymatga ega
+// massivning oxirgi elementi bo'lgan arr1[arr1.length-1] => eng kichik qiymatga ega
+\n\n`;
+
+  const arr2 = [1, 13, 200, 35, -25, 0];
+  output += `Hozirgi massiv: ${JSON.stringify(arr2)} \n\n`;
+  arr2.sort(function (a, b) {
+    return a - b;
+  });
+
+  output += `Kamayish tartibida Saralangan massiv: 
+${JSON.stringify(arr2)} \n\n`;
+  output += `Eng kichik qiymat: ${JSON.stringify(arr2[0])} \n\n`;
+  output += `Eng katta qiymat: ${JSON.stringify(arr2[arr2.length - 1])} \n\n`;
+
   //=================
+
+  output += `Eslatma!!!
+Agar siz faqat eng kata (yoki eng kichik) qiymatni topmoqchi bo'lsangiz, butun massivni saralash juda samarasiz usuldir. 
+
+Agar siz eng kata (yoki eng kichik) qiymatni topmoqchi bo'lsangiz, Math.min() funksiyasidan foydalaning:
+
+const points = [40, 100, 1, 5, 25, 10];
+
+function myArrayMin(arr) {
+  return Math.min.apply(null, arr);
+}
+  
+\n\n`;
   //=================
+
   //=================
   //=================
   //=================
@@ -630,4 +769,16 @@ output += `ESLATMA!!!
 function clearOutput() {
   document.getElementById("output").querySelector("pre").textContent = "";
   document.getElementById("inputString").value = "";
+}
+
+const array = [40, 100, 1, 5, 25, 10];
+
+function myFunction() {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let k = array[i];
+    array[i] = array[j];
+    array[j] = k;
+  }
+  document.getElementById("demo").innerHTML = array;
 }
