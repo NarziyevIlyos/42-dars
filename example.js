@@ -111,65 +111,114 @@
 // const boundClickHandler = obj.handleClick.bind(obj);
 // // Use `boundClickHandler` as an event listener, ensuring `this` always refers to `obj`.
 
-// yakka holatda this => global obyektga ishora qiladi
-let aloneThis = this;
+// // yakka holatda this => global obyektga ishora qiladi
+// let aloneThis = this;
 
-function showThis(){
-  // this - function expressiondagi qaysi turdagi funksiya (= anonym funksiya yoki arrow funksiya) bilan funksiya yaratilganiga qarab, shu funksiyadan FOYDALANAYOTGAN OBJECTga (= anonym funksiya uchun) yoki CHAQIRILGAN joyiga (= arrow funksiya uchun) egalik qiluvchi obyekt hisoblanadi
-  console.log(this); // bu yerda showThis() funksiyasi global obyekt maydonida yaratilgan. Demak, showThis() funksiyasi ichidagi this => global obyekt ya'ni window obyektidir
+// function showThis(){
+//   // this - function expressiondagi qaysi turdagi funksiya (= anonym funksiya yoki arrow funksiya) bilan funksiya yaratilganiga qarab, shu funksiyadan FOYDALANAYOTGAN OBJECTga (= anonym funksiya uchun) yoki CHAQIRILGAN joyiga (= arrow funksiya uchun) egalik qiluvchi obyekt hisoblanadi
+//   console.log(this); // bu yerda showThis() funksiyasi global obyekt maydonida yaratilgan. Demak, showThis() funksiyasi ichidagi this => global obyekt ya'ni window obyektidir
+// }
+
+// let object = {
+//   anonymFunction: function(){
+//     // this - shu anonymFunction funksiya YARATILGAN maydonga egalik qiluvchi obyekt hisoblanadi
+//     console.log("this => ustida Anonym funksiya ish olib borayotgan OBJECTga ishora qiladi => ", this); // bu yerda anonymFunction() funksiyasi object obyekt maydonida yaratilgan. Demak, anonymFunction() funksiyasi ichidagi this => object obyektidir
+//   },
+//   arrowFunction: () => {
+//     // this - shu anonymFunction funksiya CHAQIRILGAN maydonga egalik qiluvchi obyekt hisoblanadi
+//     console.log("this => arrowFunction CHAQIRILGAN (= aniqlangan) joyiga egalik qiluvchi OBJECTga ishora qiladi => ", this); // bu yerda anonymFunction() funksiyasi object obyekt maydonida yaratilgan. Demak, anonymFunction() funksiyasi ichidagi this => object obyektidir
+//   },
+
+//   outerFunction: function(){
+//     console.log("Tashqi anonym funksiyada this => shu funksiyadan foydalanayotgan obyektga teng => ", this);
+
+//     function innerFunction(){
+//         console.log("Tashqi funksiya o'zining this'ini hech qachon Ichki Funksiyaga meros qilib bermaydi, shu bois Ichki Funksiya ichidagi this => GLOBAL OBJECTga ishora qiladi", this);
+//     }
+
+//     innerFunction() // this doim shu funksiyadan foydalanayotgan obyektga ishora qiladi, biroq ichki funksiya => tashqi funksiya ichida yaratilgani bois tashqi funksiyani o'zining obyekti sifatida ololmaydi, shu bois u Global Obyektni o'zining obyekti sifatida oladi
+//   },
+// }
+
+// "use strict";
+// let aloneThis_InStrictMode = this;
+// let ThisInFunction_InObject_InStrictMode = {
+//   StrictFunction : function (){
+//     console.log("global obyektning Qat'iy rejimida this", this);
+//   }
+// }
+
+// "use strict";
+// function myStrictFunction(){
+//   console.log("Qat'iy funksiya ichida this => undefinedga teng", this);
+// }
+
+
+// console.log("Global maydonda yaratilgan yolg'iz this => Global obyektga ishora qiladi, ya'ni window obyektga", aloneThis);
+// console.log("Global maydonda yaratilgan odatiy funksiya ichidagi this => Global obyektga ishora qiladi, ya'ni window obyektga ", showThis);; // window obyektining tanasi (= global obyektning tanasi) chiqadi
+// object.anonymFunction(); // object tanasi
+// object.arrowFunction(); // Global object (= Window obyekti) tanasi
+// object.outerFunction(); // shu funksiyadan foydalanayotgan obyektga ishora qiladi
+// console.log("qat'iy rejimda turgan yolg'iz this => Global objectga ishora qiladi", aloneThis_InStrictMode); //  window obyektining tanasi (= global obyektning tanasi) chiqadi
+// console.log("qat'iy rejimda, Object ichidagi Funksiya ichida turgan this => ", ThisInFunction_InObject_InStrictMode); //  yaratilgan joyiga egalik qiluvchi obyektining tanasi chiqadi
+// myStrictFunction(); // undefined
+
+
+
+// let obj = {
+//   anonymousFunction: function () {
+//     console.log(this);
+//   }
+// };
+
+// let standaloneFunction = obj.anonymousFunction;
+// standaloneFunction(); // `this` => global obyektga (yoki qat'iy rejimda `undefined`ga ishora qiladi)
+
+function funct(){
+  let sum = 0;
+  return function(){
+    sum++;
+    return sum;
+  }
 }
 
-let object = {
-  anonymFunction: function(){
-    // this - shu anonymFunction funksiya YARATILGAN maydonga egalik qiluvchi obyekt hisoblanadi
-    console.log("this => ustida Anonym funksiya ish olib borayotgan OBJECTga ishora qiladi => ", this); // bu yerda anonymFunction() funksiyasi object obyekt maydonida yaratilgan. Demak, anonymFunction() funksiyasi ichidagi this => object obyektidir
-  },
-  arrowFunction: () => {
-    // this - shu anonymFunction funksiya CHAQIRILGAN maydonga egalik qiluvchi obyekt hisoblanadi
-    console.log("this => arrowFunction CHAQIRILGAN (= aniqlangan) joyiga egalik qiluvchi OBJECTga ishora qiladi => ", this); // bu yerda anonymFunction() funksiyasi object obyekt maydonida yaratilgan. Demak, anonymFunction() funksiyasi ichidagi this => object obyektidir
-  },
+let res = funct();
 
-  outerFunction: function(){
-    console.log("Tashqi anonym funksiyada this => shu funksiyadan foydalanayotgan obyektga teng => ", this);
+console.log(res()); // 1
+console.log(res()); // 2
+console.log(res()); // 3
 
-    function innerFunction(){
-        console.log("Tashqi funksiya o'zining this'ini hech qachon Ichki Funksiyaga meros qilib bermaydi, shu bois Ichki Funksiya ichidagi this => GLOBAL OBJECTga ishora qiladi", this);
+let GlobalVar = "GlobalVar";
+
+function outerFunction() {
+    let VarOfOuterFuntion = "VarOfOuterFuntion";
+
+    function innerFunction() {
+        console.log("Ichki funksiya ichida Chaqirilgan Global o'zgaruvchisi => ", GlobalVar); // OK
+        console.log("Ichki funksiya ichida Chaqirilgan Tashqi funksiya o'zgaruvchisi => ", VarOfOuterFuntion); // OK
     }
 
-    innerFunction() // this doim shu funksiyadan foydalanayotgan obyektga ishora qiladi, biroq ichki funksiya => tashqi funksiya ichida yaratilgani bois tashqi funksiyani o'zining obyekti sifatida ololmaydi, shu bois u Global Obyektni o'zining obyekti sifatida oladi
-  },
+    console.log("Tashqi funksiya ichida chaqirilgan Ichki funksiya natijasi:");
+    innerFunction();
 }
 
-"use strict";
-let aloneThis_InStrictMode = this;
-let ThisInFunction_InObject_InStrictMode = {
-  StrictFunction : function (){
-    console.log("global obyektning Qat'iy rejimida this", this);
+console.log("Global maydonda Tashqi funksiya chaqiruvi natijasi => ");
+outerFunction(); // Tashqi funkiyaning otasi Global maydon. Shuning uchun u ishlaydi
+innerFunction(); // farzand-funksiya faqat ota-funksiya ichida ishlaydi; otasidan tashqarida ishlamaydi
+
+function outer() {
+  let a = 10; // Environment Record'ga yoziladi
+  const b = 20;
+
+  function inner() {
+      let c = 30;
+      console.log(a, b, c); // Tashqi va lokal lexical environmentdan qiymatlar olinadi
   }
+
+  inner();
 }
 
-"use strict";
-function myStrictFunction(){
-  console.log("Qat'iy funksiya ichida this => undefinedga teng", this);
-}
-
-
-console.log("Global maydonda yaratilgan yolg'iz this => Global obyektga ishora qiladi, ya'ni window obyektga", aloneThis);
-console.log("Global maydonda yaratilgan odatiy funksiya ichidagi this => Global obyektga ishora qiladi, ya'ni window obyektga ", showThis);; // window obyektining tanasi (= global obyektning tanasi) chiqadi
-object.anonymFunction(); // object tanasi
-object.arrowFunction(); // Global object (= Window obyekti) tanasi
-object.outerFunction(); // shu funksiyadan foydalanayotgan obyektga ishora qiladi
-console.log("qat'iy rejimda turgan yolg'iz this => Global objectga ishora qiladi", aloneThis_InStrictMode); //  window obyektining tanasi (= global obyektning tanasi) chiqadi
-console.log("qat'iy rejimda, Object ichidagi Funksiya ichida turgan this => ", ThisInFunction_InObject_InStrictMode); //  yaratilgan joyiga egalik qiluvchi obyektining tanasi chiqadi
-myStrictFunction(); // undefined
+outer();
 
 
 
-let obj = {
-  anonymousFunction: function () {
-    console.log(this);
-  }
-};
-
-let standaloneFunction = obj.anonymousFunction;
-standaloneFunction(); // `this` => global obyektga (yoki qat'iy rejimda `undefined`ga ishora qiladi)
