@@ -23,3 +23,22 @@ let stringedArray =fruits1.toString();
 console.log(stringedArray);
 console.log(fruits1);
 console.log(typeof fruits1);
+
+
+
+
+
+const person = {
+    name: "Alice",
+    greet: () => {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+};
+
+const anotherPerson = { name: "Bob" };
+
+// Arrow funksiya boshqa joydan chaqiriladi
+const greet = person.greet;
+greet(); // Hello, my name is undefined
+
+
