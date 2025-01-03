@@ -5,10 +5,10 @@
 //     1) Massivning => oxirgi indeksidan => takrorlashni boshlash uchun i'ning boshlang'ich qiymatiga massivning uzunligi bilan birning ayirmasi ifodasini ( array.length - 1)  beriladi,
 //     chunki massiv elementlarini sanash 0 dan boshlanadi, shu bois massiv uzunligi uning elementlari sonidan 1 taga kam bo'ladi. (array.length - 1)
 //     2) i => 1 gacha kamayib boradi (= i > 0), (= i--);
-//     3) Math.random() => 0 va 1 orasidagi tasodifiy o’nli kasr sonni hosil qiladi.
-//     4) Math.random() * (i + 1) ifodasi => o’nli kasr sonni => [0, i + 1) oraliqda qiymatini o’zgartiradi.
-//     5) Ushbu o’nli kasr sonni (i + 1) ga ko'paytirish => [0, i + 1) oraliqdagi sonlarni beradi – ya’ni tasodifiy indeks => 0 dan ( 0 ham kiradi) i gacha bo'lgan barcha butun sonlarni o'z ichiga oladi
-//     Math.floor(...) => qiymati o’zgargan o’nli kasrni =>  0 va i orasidagi butun songa aylantiradi
+//     3) Math.random() => 0 va 1 orasidagi tasodifiy o'nli kasr sonni hosil qiladi.
+//     4) Math.random() * (i + 1) ifodasi => o'nli kasr sonni => [0, i + 1) oraliqda qiymatini o'zgartiradi.
+//     5) Ushbu o'nli kasr sonni (i + 1) ga ko'paytirish => [0, i + 1) oraliqdagi sonlarni beradi – ya'ni tasodifiy indeks => 0 dan ( 0 ham kiradi) i gacha bo'lgan barcha butun sonlarni o'z ichiga oladi
+//     Math.floor(...) => qiymati o'zgargan o'nli kasrni =>  0 va i orasidagi butun songa aylantiradi
 
 //    */
 //     let j = Math.floor(randomMultipleIplus1 = (randomNumber = Math.random()) * (i));
@@ -238,7 +238,7 @@
 //   // this ta'siri bilan Qaram funksiyaga aylangan mustaqil funksiya
 //   add: function() {
 //     // a va b aniqlanadi
-//     // chunki this => mustaqil funksiyani object3 obyektiga bog'lab qo'ydi (= qaram qilib qo'ydi). Natijada qaram funksiyaga aylangan mustaqil funksiya => object3 obyekti o’zining tanasidan ko’rsatgan o’zgaruvchilarning qiymatini hisoblab beradi.
+//     // chunki this => mustaqil funksiyani object3 obyektiga bog'lab qo'ydi (= qaram qilib qo'ydi). Natijada qaram funksiyaga aylangan mustaqil funksiya => object3 obyekti o'zining tanasidan ko'rsatgan o'zgaruvchilarning qiymatini hisoblab beradi.
 //     return this.a + this.b; // ReferenceError: a is not defined
 //   }
 // }
@@ -495,103 +495,140 @@
 // let result_2 = object1.greet.call(object2);
 
 
-console.log(this); // global obyekt
+// console.log(this); // global obyekt
 
-this.name = "Global obyekt";
-this.a = 9;
-this.b = 3;
+// this.name = "Global obyekt";
+// this.a = 9;
+// this.b = 3;
 
-let local_let = 2; // global maydonda mavjud, ammo global maydonga avtomatik tarzda qo'shilmaydi.
-const local_const = 3; // global maydonda mavjud, ammo global maydonga avtomatik tarzda qo'shilmaydi.
+// let local_let = 2; // global maydonda mavjud, ammo global maydonga avtomatik tarzda qo'shilmaydi.
+// const local_const = 3; // global maydonda mavjud, ammo global maydonga avtomatik tarzda qo'shilmaydi.
 
-/**
- * var a = 9;
- * var b = 3; sifatida ham global o'zgaruvchi ochsa bo'ladi.
- * 
- * lekin, const va let bilan ochilgan o'zgaruvchi Global kontekstda bo'lgani bilan, window obyektida mavjud bo'lmaydi.
- */
-const calculator = {
-  name: "Calculator",
-  type: "simple",
-  a: 12,
-  b: 4,
-  subtract: function(){
-    console.log("funksiyaning egasi (= this) => ", this.name, " = ", this);
+// /**
+//  * var a = 9;
+//  * var b = 3; sifatida ham global o'zgaruvchi ochsa bo'ladi.
+//  * 
+//  * lekin, const va let bilan ochilgan o'zgaruvchi Global kontekstda bo'lgani bilan, window obyektida mavjud bo'lmaydi.
+//  */
+// const calculator = {
+//   name: "Calculator",
+//   type: "simple",
+//   a: 12,
+//   b: 4,
+//   subtract: function(){
+//     console.log("funksiyaning egasi (= this) => ", this.name, " = ", this);
 
-    console.log("oddiy anonym funksiya obyektning funksiyasi sifatida chaqirilganda, anonym funksiyaning egasi bo'lgan obyekt yoki funksiya o'zining maydonidagi xossalar va funksiyalarga ishlov berish uchun shu anonym funksiyaga o'zining elementlarini this yordamida beradi");
-    console.log(`(this.a = ${this.a}) - (this.b = ${this.b}) = ` + (this.a - this.b)); // (this.a = 12) - (this.b = 4) = 8
+//     console.log("oddiy anonym funksiya obyektning funksiyasi sifatida chaqirilganda, anonym funksiyaning egasi bo'lgan obyekt yoki funksiya o'zining maydonidagi xossalar va funksiyalarga ishlov berish uchun shu anonym funksiyaga o'zining elementlarini this yordamida beradi");
+//     console.log(`(this.a = ${this.a}) - (this.b = ${this.b}) = ` + (this.a - this.b)); // (this.a = 12) - (this.b = 4) = 8
 
-    function degree(){
-      console.log("Agar oddiy funksiya => mustaqil funksiya sifatida chaqirilsa, oddiy funksiyaning egasi => GLOBAL OBJECT bo'ladi. Global obyekt o'zining maydonidagi xossalar va funksiyalarga ishlov berish uchun shu anonym funksiyaga o'zining elementlarini this yordamida beradi");
-      console.log("funksiyaning egasi (= this) => ", this.name, " = ", this);
-      console.log(`(this.a = ${this.a}) **2 = ` + (this.a **2));
-    }
-    // mustaqil funksiya sifatida chaqirilyapti
-    degree(); 
-    /**
-     javob:
-     (this.a = 9) **2 = 81 (= window obyektida)
-     this.a = undefined **2) = NaN (= terminaldagi node.jsda)
-     */
+//     function degree(){
+//       console.log("Agar oddiy funksiya => mustaqil funksiya sifatida chaqirilsa, oddiy funksiyaning egasi => GLOBAL OBJECT bo'ladi. Global obyekt o'zining maydonidagi xossalar va funksiyalarga ishlov berish uchun shu anonym funksiyaga o'zining elementlarini this yordamida beradi");
+//       console.log("funksiyaning egasi (= this) => ", this.name, " = ", this);
+//       console.log(`(this.a = ${this.a}) **2 = ` + (this.a **2));
+//     }
+//     // mustaqil funksiya sifatida chaqirilyapti
+//     degree(); 
+//     /**
+//      javob:
+//      (this.a = 9) **2 = 81 (= window obyektida)
+//      this.a = undefined **2) = NaN (= terminaldagi node.jsda)
+//      */
 
-    let arrowFunction = (a,b) => {
-      console.log("arrow function QAYERDA CHAQIRILGAN bo'lsa, o'sha maydonga egalik qiluvchi obyekt yoki funksiya arrow funktionning egasi bo'ladi. Va shu obyekt yoki funksiya o'zining maydonidagi xossalar va funksiyalarga ishlov berish uchun shu arrow funksiyaga o'zining elementlarini this yordamida beradi");
-      console.log("arrowFunction funksiyasining egasi (= this) => ", this.name, " = ", this);
-      console.log(`(this.a = ${this.a}) + (this.b = ${this.b}) = `, this.a + this.b);
-    };
+//     let arrowFunction = (a,b) => {
+//       console.log("arrow function QAYERDA CHAQIRILGAN bo'lsa, o'sha maydonga egalik qiluvchi obyekt yoki funksiya arrow funktionning egasi bo'ladi. Va shu obyekt yoki funksiya o'zining maydonidagi xossalar va funksiyalarga ishlov berish uchun shu arrow funksiyaga o'zining elementlarini this yordamida beradi");
+//       console.log("arrowFunction funksiyasining egasi (= this) => ", this.name, " = ", this);
+//       console.log(`(this.a = ${this.a}) + (this.b = ${this.b}) = `, this.a + this.b);
+//     };
 
-    arrowFunction(); // (this.a = 12) + (this.b = 4) =  16
-  },
+//     arrowFunction(); // (this.a = 12) + (this.b = 4) =  16
+//   },
 
-  arrowMultiple: (a,b) => {
-    console.log("arrowMultiple nomli arrow funksiya QAYERDA CHAQIRILGAN bo'lsa, o'sha joyning egasi => arrowMultiple nomli arrow funksiyasining egasi ham bo'ladi", this.name, " => ", this);
-    console.log(`(this.a = ${this.a}) * (this.b = ${this.b}) = ` + this.a * this.b); // (this.a = 9) * (this.b = 3) = 27
+//   arrowMultiple: (a,b) => {
+//     console.log("arrowMultiple nomli arrow funksiya QAYERDA CHAQIRILGAN bo'lsa, o'sha joyning egasi => arrowMultiple nomli arrow funksiyasining egasi ham bo'ladi", this.name, " => ", this);
+//     console.log(`(this.a = ${this.a}) * (this.b = ${this.b}) = ` + this.a * this.b); // (this.a = 9) * (this.b = 3) = 27
 
-    let divider = (a,b) => {
-      console.log(`(this.a = ${this.a}) / (this.b = ${this.b}) = ` + this.a / this.b);
-    }
+//     let divider = (a,b) => {
+//       console.log(`(this.a = ${this.a}) / (this.b = ${this.b}) = ` + this.a / this.b);
+//     }
 
-    divider(); // (this.a = 9) / (this.b = 3) = 3
+//     divider(); // (this.a = 9) / (this.b = 3) = 3
 
-    let ildiziniTopuvchi = function(a){
-      console.log("Agar oddiy funksiya => mustaqil funksiya sifatida chaqirilsa, oddiy funksiyaning egasi => GLOBAL OBJECT bo'ladi");
-      console.log("funksiyaning egasi (= this) => ", this.name, " = ", this);
-      console.log(this.a + " => " + Math.sqrt(this.a) );
-    }
+//     let ildiziniTopuvchi = function(a){
+//       console.log("Agar oddiy funksiya => mustaqil funksiya sifatida chaqirilsa, oddiy funksiyaning egasi => GLOBAL OBJECT bo'ladi");
+//       console.log("funksiyaning egasi (= this) => ", this.name, " = ", this);
+//       console.log(this.a + " => " + Math.sqrt(this.a) );
+//     }
 
-    ildiziniTopuvchi(); 
-    /**
-    javob: 
+//     ildiziniTopuvchi(); 
+//     /**
+//     javob: 
 
-    9 => 3 (window obyektida)
-    undefined => NaN (=  terminaldagi node.js)
-    */ 
-  }
-}
+//     9 => 3 (window obyektida)
+//     undefined => NaN (=  terminaldagi node.js)
+//     */ 
+//   }
+// }
 
-calculator.subtract();
-calculator.arrowMultiple();
+// calculator.subtract();
+// calculator.arrowMultiple();
 
-const cars = [
-  {type:"Volvo", year:2016},
-  {type:"Saab", year:2001},
-  {type:"BMW", year:2010}
-];
+// const cars = [
+//   {type:"Volvo", year:2016},
+//   {type:"Saab", year:2001},
+//   {type:"BMW", year:2010}
+// ];
 
-displayCars(); 
+// displayCars(); 
 
-console.log("\n");
+// console.log("\n");
 
-cars.sort(function(a, b){return a.year - b.year});
-displayCars();
+// cars.sort(function(a, b){return a.year - b.year});
+// displayCars();
 
-function displayCars() {
+// function displayCars() {
 
-  for(let i=0; i<cars.length; i++){
-    console.log(
-      cars[i].type + " " + cars[i].year + "\n"
-    );
-  }
-}
+//   for(let i=0; i<cars.length; i++){
+//     console.log(
+//       cars[i].type + " " + cars[i].year + "\n"
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+// const sonlar = [1, 2, 3, 4];
+// const natija = sonlar.reduceRight((str, son) => `${str} - ${son}`, '');
+// console.log(natija); // Natija: "-4-3-2-1"
+
+
+
+
+
+const sonlar = [10, 20, 30]; // Elementlar
+const sonlar2 = [40, 50, 60]; // Elementlar
+
+const newArr = [1,2, ...sonlar2];
+console.log(newArr);
+
+
+
+
+
+
+
+  
+    
+
+
+
+
 
 
